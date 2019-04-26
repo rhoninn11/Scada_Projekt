@@ -1,0 +1,11 @@
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/bin/Debug/netcoreapp2.1/HubServer.deps.json
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/bin/Debug/netcoreapp2.1/HubServer.runtimeconfig.json
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/bin/Debug/netcoreapp2.1/HubServer.runtimeconfig.dev.json
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/bin/Debug/netcoreapp2.1/HubServer.dll
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/bin/Debug/netcoreapp2.1/HubServer.pdb
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/obj/Debug/netcoreapp2.1/HubServer.csprojAssemblyReference.cache
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/obj/Debug/netcoreapp2.1/HubServer.csproj.CoreCompileInputs.cache
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/obj/Debug/netcoreapp2.1/HubServer.AssemblyInfoInputs.cache
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/obj/Debug/netcoreapp2.1/HubServer.AssemblyInfo.cs
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/obj/Debug/netcoreapp2.1/HubServer.dll
+/home/rhoninn/Dokumenty/studia/SCADA/projekt/HubServer/obj/Debug/netcoreapp2.1/HubServer.pdb
