@@ -3,6 +3,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
+using ClientlikeSensor;
+
 namespace HubServer
 {
     class Program
@@ -28,22 +30,19 @@ namespace HubServer
                     Console.WriteLine("Weatiting Connection");
                     Socket clientlikeSensor = listner.Accept();
 
-                    byte[] buffer = new Byte[1024];
+                    byte[] buffer = new Byte[16];
                     String sBuffer = String.Empty;
 
                     while (true)
                     {
                         int bytesRecived = clientlikeSensor.Receive(buffer);
-                        sBuffer += Encoding.UTF8.GetString(buffer, 0, bytesRecived);
-                        if(sBuffer.Contains('\r'))
-                            break;
+                        if(bytesRecived == 16){
+                            SignalData data = new SignalData().FromBytes(buffer);
+                            Console.Clear();
+                            Console.WriteLine($"Recived data - value:{data.value},\n\ttime stamp:{data.timeSpan}");
+
+                        }
                     }
-
-                    Console.WriteLine($"Recived data: {sBuffer}");
-
-                    byte[] messageToSensor = Encoding.UTF8.GetBytes("Jest komunikcaja");
-
-                    clientlikeSensor.Send(messageToSensor);
 
                     clientlikeSensor.Shutdown(SocketShutdown.Both);
                     clientlikeSensor.Close();
