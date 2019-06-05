@@ -18,9 +18,9 @@ function App() {
         <ButtonBar></ButtonBar>
         <header className="App-header">
           <SensorData>
-            <SimplePlot elo='uv'></SimplePlot>
-            <SimplePlot elo='pv'></SimplePlot>
-            <SimplePlot elo='amt'></SimplePlot>
+            <SimplePlot id={'sensor1'}></SimplePlot>
+            <SimplePlot id={'sensor2'}></SimplePlot>
+            <SimplePlot id={'sensor3'}></SimplePlot>
           </SensorData>
 
 

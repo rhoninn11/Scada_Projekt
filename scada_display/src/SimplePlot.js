@@ -1,19 +1,13 @@
 import React from 'react'
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+
 import SensorDataContainer from './SensorDataContainer'
 import { Subscribe } from 'unstated';
+import Chart from 'react-c3-component';
+import 'c3/c3.css';
 
 const SimplePlot = (props) => {
-    return (
-        <Subscribe to={[SensorDataContainer]}>
-            {context => (
-                <LineChart width={600} height={300} data={context.state.data}>
-                    <Line type="monotone" dataKey={props.elo} stroke="#8884d8" />
-                    <CartesianGrid stroke="#ccc" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                </LineChart>)}
-        </Subscribe>)
+    return <div id={props.id}></div>
+
 }
 
 export default SimplePlot

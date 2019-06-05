@@ -5,10 +5,10 @@ const SensorData = (props) => {
     console.log(props.children);
 
     return (
-        <Card>
+        <Card style={{width: '20em'}}>
             <Card.Header>Sensors Data</Card.Header>
             <ListGroup variant="flush">
-                {props.children.map((child) => <ListGroup.Item>{child}</ListGroup.Item>)}
+                {props.children.map((child) => <ListGroup.Item key={child.props.id}>{child}</ListGroup.Item>)}
             </ListGroup>
         </Card>
     )
