@@ -7,6 +7,7 @@ class SensorDataContainer extends Container {
 
     constructor() {
         super();
+        setInterval(this.generateData, 50)
     }
     state = {
         generationStatus: false,
@@ -20,19 +21,18 @@ class SensorDataContainer extends Container {
     interval = undefined;
     lastTimestamp = null;
     statusUpdated = true;
+    mainSensor = []
     sensor1 = []
     sensor2 = []
     sensor3 = []
     ch1 = null
     ch2 = null
     ch3 = null
+    chmain = null
 
 
     generateData = () => {
-        
-        axios.get('http://localhost:5000/data').then(result => {
-            console.log(result);
-        })
+
 
         if (!this.statusUpdated) {
             return;
@@ -51,55 +51,65 @@ class SensorDataContainer extends Container {
                 bindto: '#sensor3',
                 data: { columns: [['sensor3', ...this.sensor3]] }
             });
+            this.chmain = c3.generate({
+                bindto: '#main',
+                data: { columns: [['Proccesed', ...this.mainSensor]] }
+            });
             console.log('elo');
 
         }
 
-        let time_points = 0;
-
-        if (this.lastTimestamp == null) {
-            this.lastTimestamp = Date.now();
-            time_points = 1;
-        }
-
-        let timeStump = Date.now()
-        let timeDelta = timeStump - this.lastTimestamp;
-        this.lastTimestamp = timeStump;
-
-        console.log(timeDelta);
-
-
-        let sin1Value = Math.sin(2 * Math.PI * 0.03 * timeStump / 1000)
-        let sin2Value = Math.sin(2 * Math.PI * 0.2 * timeStump / 1000)
-        let sin3Value = Math.sin(2 * Math.PI * 0.13 * timeStump / 1000)
-
         this.statusUpdated = false;
-        this.sensor1.push(sin1Value);
-        this.sensor2.push(sin2Value);
-        this.sensor3.push(sin3Value);
+        axios.get('http://localhost:5000/data').then(result => {
 
-        while (this.sensor1.length > 100) {
-            this.sensor1.shift();
-        }
+            let data = JSON.parse(result.data)
 
-        while (this.sensor2.length > 100) {
-            this.sensor2.shift();
-        }
+            let newMain = data['main']
+            let new1 = data['sensor1']
+            let new2 = data['sensor2']
+            let new3 = data['sensor3']
+            console.log(new1);
+            console.log(new2);
+            console.log(new3);
+            console.log(newMain);
+            
 
-        while (this.sensor3.length > 100) {
-            this.sensor3.shift();
-        }
+            this.sensor1.push(...new1);
+            this.sensor2.push(...new2);
+            this.sensor3.push(...new3);
+            this.mainSensor.push(...newMain);
 
-        this.ch1.load({
-            columns: [['sensor1', ...this.sensor1]]
-        });
-        this.ch2.load({
-            columns: [['sensor2', ...this.sensor3]]
-        });
-        this.ch3.load({
-            columns: [['sensor3', ...this.sensor3]]
-        });
-        this.statusUpdated = true;
+            while (this.sensor1.length > 100) {
+                this.sensor1.shift();
+            }
+    
+            while (this.sensor2.length > 100) {
+                this.sensor2.shift();
+            }
+    
+            while (this.sensor3.length > 100) {
+                this.sensor3.shift();
+            }
+
+            while (this.mainSensor.length > 100) {
+                this.mainSensor.shift();
+            }
+    
+            this.chmain.load({
+                columns: [['Proccesed', ...this.mainSensor]]
+            });
+            this.ch1.load({
+                columns: [['sensor1', ...this.sensor1]]
+            });
+            this.ch2.load({
+                columns: [['sensor2', ...this.sensor3]]
+            });
+            this.ch3.load({
+                columns: [['sensor3', ...this.sensor3]]
+            });
+            this.statusUpdated = true;
+
+        }).catch(error => console.log(error))
     }
 }
 

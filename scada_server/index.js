@@ -15,44 +15,33 @@ const dataServer = net.createServer(socket => {
         let data = JSON.parse(chunk.toString('utf8'))
 
         sensorProcessedData.push(data['ProcessedData'])
-        if(sensorProcessedData.length > 500){
+        if (sensorProcessedData.length > 500) {
             sensorProcessedData.shift();
         }
 
         let sarr = data['SensorData'];
-        console.log(sarr.length);
-        if(sarr.length == 1){
-            console.log('elo',sarr[0]);
+        console.log(sarr);
+        if (sarr.length >= 1) {
+            console.log('elo', sarr[0]);
             sensor1Data.push(sarr[0]);
-            if(sensor1Data > 500){
+            if (sensor1Data > 500) {
                 sensor1Data.shift();
             }
         }
-        else if(sarr.lengt == 2){
-            console.log('elo',sarr[0]);
-            console.log('elo2',sarr[1]);
+        if (sarr.length >= 2) {
+            console.log('elo', sarr[1]);
+            sensor2Data.push(sarr[1]);
+            if (sensor2Data > 500) {
+                sensor2Data.shift();
+            }
         }
-        else if(sarr.lengt == 3){
-            console.log('elo',sarr[0]);
-            console.log('elo2',sarr[1]);
-            console.log('elo3',sarr[2]);
+        if (sarr.length >= 3) {
+            console.log('elo', sarr[2]);
+            sensor3Data.push(sarr[2]);
+            if (sensor3Data > 500) {
+                sensor3Data.shift();
+            }
         }
-
-        // if(sarr.lengt == 2){
-        //     console.log('elo2',sarr[1]);
-        //     sensor2Data.push(sarr[1]);
-        //     if(sensor2Data > 500){
-        //         sensor2Data.shift();
-        //     }
-        // };
-
-        // if(sarr.lengt >= 3){
-        //     console.log('elo3',sarr[2]);
-        //     sensor3Data.push(sarr[2]);
-        //     if(sensor3Data > 500){
-        //         sensor3Data.shift();
-        //     }
-        // };
     });
 })
 app.use(express.static('../scada_display/build'))
@@ -67,7 +56,7 @@ app.get('/data', (req, res) => {
         sensor2: [...sensor2Data],
         sensor3: [...sensor3Data],
     };
-    
+
     sensor1Data = [];
     sensor2Data = [];
     sensor3Data = [];

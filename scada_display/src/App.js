@@ -17,10 +17,14 @@ function App() {
         <Navigation></Navigation>
         <ButtonBar></ButtonBar>
         <header className="App-header">
-          <SensorData>
+          <SensorData title="Sensor Data">
             <SimplePlot id={'sensor1'}></SimplePlot>
             <SimplePlot id={'sensor2'}></SimplePlot>
             <SimplePlot id={'sensor3'}></SimplePlot>
+          </SensorData>
+          <SensorData title="ProccessedSignal">
+            <SimplePlot id={'main'}></SimplePlot>
+            <div id="elo1"></div>
           </SensorData>
 
 
