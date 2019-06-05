@@ -89,6 +89,7 @@ namespace HubServer
                 {
                     StringBuilder info = new StringBuilder();
                     int i = 1;
+                    
                     sensors.ForEach(s =>
                     {   
                         while(s.signalQueue.Count > 1)
